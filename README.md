@@ -62,7 +62,7 @@ Peso (kg)                         -0.146315   1.000000     0.186422             
 Carga Final                       -0.692058   0.186422     1.000000              0.878326
 VO2 medido máximo (mL/kg/min)     -0.630072  -0.174401     0.878326              1.000000 
 ```
-![HeatMap das correlações](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/correlation_heatmap.png
+![HeatMap das correlações](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/correlation_heatmap.png)
 
 ![ScatterPlot todas as variáveis](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/scatter_all.png)
 
