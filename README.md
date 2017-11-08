@@ -20,6 +20,7 @@ Inicialmente devemos construir um conhecimento mínimo dos dados que desejamos a
 
 A base de dados é composta por 1172 pontos cada um com quatro caracteristicas: Idade, Carga Final, Peso e VO2 (os dois primeros são variáveis inteiras e as demais são definidas no espaço do números reais). A seguir podemos ver os primeiros cinco pontos da base de dados:
 
+```
     IDADE (anos)  Peso (kg)  Carga Final  VO2 medido máximo (mL/kg/min)
 0            49       79.1          250                      49.051833
 1            30       52.4          177                      41.603053
@@ -27,8 +28,11 @@ A base de dados é composta por 1172 pontos cada um com quatro caracteristicas: 
 3            29       78.0          400                      59.102564
 4            49       69.2          242                      48.410405
 
+```
+
 Algumas informações são importantes para entender os dados, a seguir esta apresentado um pequeno sumário sobre os dados da variáveis:
 
+```
        IDADE (anos)    Peso (kg)  Carga Final  VO2 medido máximo (mL/kg/min)
 count   1172.000000  1172.000000  1172.000000                    1172.000000
 mean      53.290956    85.925776   172.271502                      29.394728
@@ -38,11 +42,15 @@ min       18.000000    45.300000    30.000000                       5.846847
 50%       54.000000    83.700000   170.000000                      28.326660
 max       91.000000   178.900000   432.000000                      73.333333
 
+```
+
 Na tabela a cima podemos ver o máximo e o mínimo de cadaracterística o que nos permite conhecer um pouco sobre os individuo. Eles são homens entre 18 e 91
 anos que pesam em média 86kg com desvio padrão de 15kg. A carga Final varia entre 70 e 430 e V02 entre 6 e 70.
 
 Para entender melhor como esses dados estão destribuidos podemos construir histogramas da base de dados:
 
+
+![Histograma das Variáveis da Base de Dados](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/hist.png)
 
 
 
