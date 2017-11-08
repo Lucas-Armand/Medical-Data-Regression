@@ -73,6 +73,44 @@ Assim, uma vez que uma exploração inicial dos dados foi realizada discuções 
 
 Inicialmente faremos uma divisão na base dados em dados de teste e dados de trainamento, de maneira que 172 dados sejam separados para dados de teste, assim foi gerado um vector com (X) que possúi 1172 valores binários aonde mil valores são do tipo "1" e 172 são do tipo "0". Os resultados nesse vetor foram embaralhados aleatóriamente de maneira que, em nossa base, todos os dados para qual o valor de "x" for igual a "1" então o ponto de ordenação correspondente na base dado será defenido com ponto de treinamento, de maneira análoga, os pontos que estiverem associados a um "0" no vetor X serão definidos como pontos de teste. Para referência, segue o vetor X na seção de Apêndice desse mesmo trabalho.
 
+Feito isso temos dois novos conjuntos:
+
+```
+>>> df.describe()
+       IDADE (anos)    Peso (kg)  Carga Final  VO2 medido máximo (mL/kg/min)
+count   1172.000000  1172.000000  1172.000000                    1172.000000
+mean      53.290956    85.925776   172.271502                      29.394728
+std       14.746297    14.799113    70.093124                      10.497250
+min       18.000000    45.300000    30.000000                       5.846847
+25%       42.000000    76.100000   120.000000                      21.797423
+50%       54.000000    83.700000   170.000000                      28.326660
+75%       64.000000    94.450000   220.000000                      35.853793
+max       91.000000   178.900000   432.000000                      73.333333
+
+>>> df_trnn.describe()
+       IDADE (anos)    Peso (kg)  Carga Final  VO2 medido máximo (mL/kg/min)
+count   1000.000000  1000.000000  1000.000000                    1000.000000
+mean      53.499000    85.812210   170.897700                      29.187956
+std       14.804431    14.737553    69.747198                      10.515372
+min       18.000000    45.300000    30.000000                       5.846847
+25%       42.000000    75.900000   120.000000                      21.550613
+50%       54.000000    83.750000   167.500000                      27.932131
+75%       64.250000    94.125000   220.000000                      35.742980
+max       91.000000   178.900000   432.000000                      73.333333
+
+>>> df_test.describe()
+       IDADE (anos)   Peso (kg)  Carga Final  VO2 medido máximo (mL/kg/min)
+count    172.000000  172.000000   172.000000                     172.000000
+mean      52.081395   86.586047   180.258721                      30.596890
+std       14.386247   15.179042    71.757785                      10.339651
+min       23.000000   52.400000    40.000000                      10.285006
+25%       41.000000   77.150000   130.000000                      22.752700
+50%       53.500000   83.550000   177.000000                      29.349168
+75%       62.250000   95.575000   220.000000                      37.547858
+max       86.000000  132.500000   400.000000                      61.498029
+```
+As tabelas apresentam as característica dos novos conjuntos de pontos. Testes mais avançados poderiam (e deveriam ser feito para um problema real), afim de garantir que os conjuntos sejam representativos da população (evitando assim resultados com bias), mas, na visão do autor, os resultados mostrados, se não suficientes para garantir, corraboram para hipótese de que essa divisão de dados seja coerente.
+
 # I) 
 
 # Apêndice:
