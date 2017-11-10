@@ -111,7 +111,9 @@ max       86.000000  132.500000   400.000000                      61.498029
 ```
 As tabelas apresentam as característica dos novos conjuntos de pontos. Testes mais avançados poderiam (e deveriam ser feito para um problema real), afim de garantir que os conjuntos sejam representativos da população (evitando assim resultados com bias), mas, na visão do autor, os resultados mostrados, se não suficientes para garantir, corraboram para hipótese de que essa divisão de dados seja coerente.
 
-# I) 
+# I) Regressão de VO2:
+
+
 
 # Apêndice:
 
