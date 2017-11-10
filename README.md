@@ -113,15 +113,257 @@ As tabelas apresentam as característica dos novos conjuntos de pontos. Testes m
 
 # I) Regressão de VO2:
 
+O primeiro modelo proposto é uma regressão polinomial de "VO2" por "Carga Final". A seguir faremos testes com polinômios entre grau 1 e 7. Polinômios com grau superior poderiam ter sido utilizados, mas sete variações de modelo polinômial são suficientes para embasar uma análise exploratória desse tipo de modelo e utilizar mais variações do modelo acarretaria numa poluição das imagens. Assim a seguir temos um plot dos resutados obetidos:
+
+![Plots para a regressão polinomial](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/poly_plot.png)
+
 
 
 # Apêndice:
 
 
-
 Valor do vector "X" que contem a ordenação dos vetores de teste e de treinamento:
 
-```
+
 X = [1 , 0 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 0 , 0 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1]
 
+
+Summario dos Modelos de Regressão linear:
+
+
+
 ```
+                                  OLS Regression Results                                  
+==========================================================================================
+Dep. Variable:     VO2 medido máximo (mL/kg/min)   R-squared:                       0.775
+Model:                                        OLS   Adj. R-squared:                  0.775
+Method:                             Least Squares   F-statistic:                     3439.
+Date:                            Sex, 10 Nov 2017   Prob (F-statistic):               0.00
+Time:                                    11:52:58   Log-Likelihood:                -3025.3
+No. Observations:                            1000   AIC:                             6055.
+Df Residuals:                                 998   BIC:                             6064.
+Df Model:                                       1                                         
+Covariance Type:                        nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [95.0% Conf. Int.]
+----------------------------------------------------------------------------------
+Carga Final**1     0.1327      0.002     58.643      0.000         0.128     0.137
+const              6.5047      0.418     15.571      0.000         5.685     7.324
+==============================================================================
+Omnibus:                       49.019   Durbin-Watson:                   2.062
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               85.515
+Skew:                           0.366   Prob(JB):                     2.70e-19
+Kurtosis:                       4.232   Cond. No.                         489.
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+```
+
+
+```
+                                  OLS Regression Results                                  
+==========================================================================================
+Dep. Variable:     VO2 medido máximo (mL/kg/min)   R-squared:                       0.775
+Model:                                        OLS   Adj. R-squared:                  0.775
+Method:                             Least Squares   F-statistic:                     1722.
+Date:                            Sex, 10 Nov 2017   Prob (F-statistic):          4.94e-324
+Time:                                    11:52:58   Log-Likelihood:                -3024.4
+No. Observations:                            1000   AIC:                             6055.
+Df Residuals:                                 997   BIC:                             6070.
+Df Model:                                       2                                         
+Covariance Type:                        nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [95.0% Conf. Int.]
+----------------------------------------------------------------------------------
+Carga Final**1     0.1445      0.009     15.465      0.000         0.126     0.163
+Carga Final**2 -3.175e-05   2.45e-05     -1.294      0.196     -7.99e-05  1.64e-05
+const              5.5824      0.826      6.757      0.000         3.961     7.204
+==============================================================================
+Omnibus:                       49.936   Durbin-Watson:                   2.064
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               87.613
+Skew:                           0.370   Prob(JB):                     9.44e-20
+Kurtosis:                       4.247   Cond. No.                     2.26e+05
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.26e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+```
+
+
+```
+                                  OLS Regression Results                                  
+==========================================================================================
+Dep. Variable:     VO2 medido máximo (mL/kg/min)   R-squared:                       0.775
+Model:                                        OLS   Adj. R-squared:                  0.775
+Method:                             Least Squares   F-statistic:                     1147.
+Date:                            Sex, 10 Nov 2017   Prob (F-statistic):          1.98e-322
+Time:                                    11:52:58   Log-Likelihood:                -3024.4
+No. Observations:                            1000   AIC:                             6057.
+Df Residuals:                                 996   BIC:                             6077.
+Df Model:                                       3                                         
+Covariance Type:                        nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [95.0% Conf. Int.]
+----------------------------------------------------------------------------------
+Carga Final**1     0.1465      0.027      5.440      0.000         0.094     0.199
+Carga Final**2 -4.315e-05      0.000     -0.298      0.766        -0.000     0.000
+Carga Final**3  1.894e-08   2.37e-07      0.080      0.936     -4.47e-07  4.85e-07
+const              5.4820      1.505      3.642      0.000         2.528     8.436
+==============================================================================
+Omnibus:                       49.973   Durbin-Watson:                   2.065
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               87.670
+Skew:                           0.370   Prob(JB):                     9.18e-20
+Kurtosis:                       4.247   Cond. No.                     1.12e+08
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.12e+08. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+```
+
+
+```
+                                  OLS Regression Results                                  
+==========================================================================================
+Dep. Variable:     VO2 medido máximo (mL/kg/min)   R-squared:                       0.776
+Model:                                        OLS   Adj. R-squared:                  0.775
+Method:                             Least Squares   F-statistic:                     860.7
+Date:                            Sex, 10 Nov 2017   Prob (F-statistic):          3.45e-321
+Time:                                    11:52:58   Log-Likelihood:                -3023.7
+No. Observations:                            1000   AIC:                             6057.
+Df Residuals:                                 995   BIC:                             6082.
+Df Model:                                       4                                         
+Covariance Type:                        nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [95.0% Conf. Int.]
+----------------------------------------------------------------------------------
+Carga Final**1     0.2202      0.066      3.331      0.001         0.090     0.350
+Carga Final**2    -0.0007      0.001     -1.257      0.209        -0.002     0.000
+Carga Final**3  2.333e-06   1.91e-06      1.222      0.222     -1.41e-06  6.08e-06
+Carga Final**4 -2.752e-09   2.25e-09     -1.221      0.222     -7.17e-09  1.67e-09
+const              2.8497      2.629      1.084      0.279        -2.309     8.008
+==============================================================================
+Omnibus:                       49.044   Durbin-Watson:                   2.066
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               86.644
+Skew:                           0.362   Prob(JB):                     1.53e-19
+Kurtosis:                       4.247   Cond. No.                     5.99e+10
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 5.99e+10. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+```
+
+
+```
+                                  OLS Regression Results                                  
+==========================================================================================
+Dep. Variable:     VO2 medido máximo (mL/kg/min)   R-squared:                       0.776
+Model:                                        OLS   Adj. R-squared:                  0.775
+Method:                             Least Squares   F-statistic:                     688.4
+Date:                            Sex, 10 Nov 2017   Prob (F-statistic):          8.11e-320
+Time:                                    11:52:58   Log-Likelihood:                -3023.4
+No. Observations:                            1000   AIC:                             6059.
+Df Residuals:                                 994   BIC:                             6088.
+Df Model:                                       5                                         
+Covariance Type:                        nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [95.0% Conf. Int.]
+----------------------------------------------------------------------------------
+Carga Final**1     0.1206      0.147      0.818      0.414        -0.169     0.410
+Carga Final**2     0.0005      0.002      0.311      0.756        -0.003     0.004
+Carga Final**3 -4.527e-06   9.27e-06     -0.488      0.625     -2.27e-05  1.37e-05
+Carga Final**4  1.443e-08   2.28e-08      0.632      0.527     -3.04e-08  5.92e-08
+Carga Final**5 -1.585e-11   2.09e-11     -0.756      0.450      -5.7e-11  2.53e-11
+const              5.6023      4.490      1.248      0.212        -3.208    14.412
+==============================================================================
+Omnibus:                       48.771   Durbin-Watson:                   2.066
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               86.819
+Skew:                           0.357   Prob(JB):                     1.40e-19
+Kurtosis:                       4.254   Cond. No.                     3.41e+13
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.41e+13. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+```
+
+
+```
+                                  OLS Regression Results                                  
+==========================================================================================
+Dep. Variable:     VO2 medido máximo (mL/kg/min)   R-squared:                       0.776
+Model:                                        OLS   Adj. R-squared:                  0.775
+Method:                             Least Squares   F-statistic:                     688.6
+Date:                            Sex, 10 Nov 2017   Prob (F-statistic):          7.34e-320
+Time:                                    11:52:58   Log-Likelihood:                -3023.3
+No. Observations:                            1000   AIC:                             6059.
+Df Residuals:                                 994   BIC:                             6088.
+Df Model:                                       5                                         
+Covariance Type:                        nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [95.0% Conf. Int.]
+----------------------------------------------------------------------------------
+Carga Final**1     0.3615      0.055      6.630      0.000         0.254     0.468
+Carga Final**2    -0.0033      0.001     -2.241      0.025        -0.006    -0.000
+Carga Final**3  2.414e-05   1.44e-05      1.675      0.094     -4.15e-06  5.24e-05
+Carga Final**4 -9.668e-08   6.67e-08     -1.449      0.148     -2.28e-07  3.42e-08
+Carga Final**5  1.968e-10   1.45e-10      1.355      0.176     -8.82e-11  4.82e-10
+Carga Final**6 -1.586e-13    1.2e-13     -1.323      0.186     -3.94e-13  7.67e-14
+const              0.0146      0.002      6.628      0.000         0.010     0.019
+==============================================================================
+Omnibus:                       49.517   Durbin-Watson:                   2.066
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               88.047
+Skew:                           0.363   Prob(JB):                     7.60e-20
+Kurtosis:                       4.260   Cond. No.                     2.03e+16
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.03e+16. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+```
+```
+                                  OLS Regression Results                                  
+==========================================================================================
+Dep. Variable:     VO2 medido máximo (mL/kg/min)   R-squared:                       0.773
+Model:                                        OLS   Adj. R-squared:                  0.772
+Method:                             Least Squares   F-statistic:                     678.3
+Date:                            Sex, 10 Nov 2017   Prob (F-statistic):          2.35e-317
+Time:                                    11:52:58   Log-Likelihood:                -3029.1
+No. Observations:                            1000   AIC:                             6070.
+Df Residuals:                                 994   BIC:                             6100.
+Df Model:                                       5                                         
+Covariance Type:                        nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [95.0% Conf. Int.]
+----------------------------------------------------------------------------------
+Carga Final**1     0.0003   1.89e-05     16.502      0.000         0.000     0.000
+Carga Final**2     0.0091      0.001     16.503      0.000         0.008     0.010
+Carga Final**3    -0.0001   1.25e-05    -10.839      0.000        -0.000    -0.000
+Carga Final**4  9.186e-07   1.08e-07      8.508      0.000      7.07e-07  1.13e-06
+Carga Final**5 -3.199e-09   4.45e-10     -7.197      0.000     -4.07e-09 -2.33e-09
+Carga Final**6  5.569e-12   8.76e-13      6.355      0.000      3.85e-12  7.29e-12
+Carga Final**7 -3.835e-15   6.64e-16     -5.772      0.000     -5.14e-15 -2.53e-15
+const           6.733e-06   4.08e-07     16.501      0.000      5.93e-06  7.53e-06
+==============================================================================
+Omnibus:                       47.552   Durbin-Watson:                   2.045
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               79.745
+Skew:                           0.368   Prob(JB):                     4.83e-18
+Kurtosis:                       4.171   Cond. No.                     1.26e+19
+==============================================================================
+
+```
+
