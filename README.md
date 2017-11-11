@@ -146,7 +146,7 @@ Assim, usando só a carga como input, o modelo escolhido é:
  
 ![R-Squared definição](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model1.png)
 
-2)
+2) A seguir repetiremos a análise, mas utilizando as variáveis 
 
 # Apêndice:
 
