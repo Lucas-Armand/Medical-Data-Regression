@@ -1,5 +1,5 @@
 # Medical-Data-Regression
-Análise de diversars técincas de regressão e classificassão realizadas sobre uma base de dados médicos reais a respeito da capacidade vascular dos pacientes.
+Este trabalho é um relatório que discute e análisa de diversars técincas de regressão e classificassão realizadas sobre uma base de dados médicos reais a respeito da capacidade vascular dos pacientes, ele foi construido para avaliação dos professores Raimundo, Rosa e Daniel para compor o grau na diciplina 
 
 "Nesta lista, iremos utilizar dados reais fornecidos gentilmente pelo Professor Claudio Gil Soares de Araujo (at ́e recentemente professor do Instituto do Cora ̧c ̃ao Edson Saad da UFRJ) da CLINIMEX,
 atrav ́es da aluna de doutorado da UFRJ Christina G. de Souza e Silva.  Os dados foram obtidos a partir  de  uma  extensa  base  de  dados  do  Prof.   Claudio  Gil,  coletada  durante  muitos  anos  e  usada
@@ -113,11 +113,40 @@ As tabelas apresentam as característica dos novos conjuntos de pontos. Testes m
 
 # I) Regressão de VO2:
 
-O primeiro modelo proposto é uma regressão polinomial de "VO2" por "Carga Final". A seguir faremos testes com polinômios entre grau 1 e 7. Polinômios com grau superior poderiam ter sido utilizados, mas sete variações de modelo polinômial são suficientes para embasar uma análise exploratória desse tipo de modelo e utilizar mais variações do modelo acarretaria numa poluição das imagens. Assim a seguir temos um plot dos resutados obetidos:
+1) O primeiro modelo proposto é uma regressão polinomial de "VO2" por "Carga Final". A seguir faremos testes com polinômios entre grau 1 e 7. Polinômios com grau superior poderiam ter sido utilizados, mas sete variações de modelo polinômial são suficientes para embasar uma análise exploratória desse tipo de modelo e utilizar mais variações do modelo acarretaria numa poluição das imagens. Assim a seguir temos um plot dos resutados obetidos:
 
 ![Plots para a regressão polinomial](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/poly_plot.png)
 
-Resultados das regreções estão no apendice
+Resultados das regreções estão no apendice, assim como os súmarios das regreções. Os coeficientes dos modelos estão plotados na tabela a seguir:
+
+![Coeficiente dos termos na primeira regressão linear](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/Coef_linear_1.png)
+
+A seguir segue uma breve discussão sobre a relevancia do NLL(w) num estudo do caso do modelo de regressão linear:
+
+![Imagens scaneadas do caderno](?)
+
+Uma vez entendido o que é o NLL é possivel se compriender como os modelos (que os resultados foram plotados no ínicio dessa seção) foram obtidos. Aqui talvez fosse interessante apresentar o NLL para cada modelo, mas foi feito a opção por usar o R² para compara os resultados do multiplos modelos. Isso porque, na visão do autor, ele oferece um resultado de mais fácil comprienção sobre a capacidade explicativa dos modelos, além de ser "normalizado" (a ordem do resultado não é influencia pela número de pontos nem pela ordem de grandeza de "y". R² é definido como:
+
+![R-Squared definição](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/raquared.png)
+
+Aqui fica claro como o R² se relaciona com o NLL uma vez que ambos são baseados no RSS (Residual Sum of Squares). Um plot da variação do R² (dos dados de teste e trainamento) para os modelos testados:
+
+![R-Squared definição](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/testXtrain_result.png)
+
+```
+y1=[0.7750754467,0.7754524946,0.7754539306,0.7757899819,0.7759189671,0.775985176,0.7760899583]
+y2=[0.7454585045,0.7455548709,0.7454815363,0.7451629196,0.7436750232,0.7439609531,0.7434698284]
+```
+
+Nesse gráfico é possivel perceber que a medida que o número de features, para suportar o modelo, aumenta o R² nos dados de treinamento aumenta, porém o contrário é percebido para os dados de teste, nestes é possível ver uma pequena melhora seguida de uma queda no resultado.
+
+Se considerarmos simplesmente os resultados, o modelo que apresenta o maior poder explicativo sobre os resultados sobre os dados de treinamento é o modelo com termos até a segunda ordem, porém a variação dos resultados foi tão pequena que, na visão do autor, o melhor modelo para predizer os dados é o de uma função de primeiro grau. Outros tipo de testes de acurácio poderiam ser feitos para aumentar a confiasa nos resultados (em vez de fazer um simples split dos dados poderia-se usar um K-fold), mas como os melhores foi de uma diferença muito pequena, foi dado preferencia ao mais simples.
+
+Assim, usando só a carga como input, o modelo escolhido é:
+ 
+![R-Squared definição](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model1.png)
+
+2)
 
 # Apêndice:
 
