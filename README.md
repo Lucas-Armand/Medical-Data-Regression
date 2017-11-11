@@ -117,7 +117,7 @@ O primeiro modelo proposto é uma regressão polinomial de "VO2" por "Carga Fina
 
 ![Plots para a regressão polinomial](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/poly_plot.png)
 
-
+Resultados das regreções estão no apendice
 
 # Apêndice:
 
@@ -366,4 +366,47 @@ Kurtosis:                       4.171   Cond. No.                     1.26e+19
 ==============================================================================
 
 ```
+
+Resultado da regreção para dados de treinamento e dados de teste:
+Grau 1:
+R² Trainamento:
+0.775075446748
+R² Teste:
+0.745458504467
+
+Grau 2:
+R² Trainamento:
+0.775452494623
+R² Teste:
+0.745554870891
+
+Grau 3:
+R² Trainamento:
+0.775453930569
+R² Teste:
+0.745481536333
+
+Grau 4:
+R² Trainamento:
+0.775789981862
+R² Teste:
+0.745162919559
+
+Grau 5:
+R² Trainamento:
+0.77591896708
+R² Teste:
+0.743675023225
+
+Grau 6:
+R² Trainamento:
+0.77598517595
+R² Teste:
+0.743960953077
+
+Grau 7:
+R² Trainamento:
+0.776089958278
+R² Teste:
+0.743469828356
 
