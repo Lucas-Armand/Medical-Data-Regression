@@ -160,11 +160,25 @@ Como podemos ver na imagem a cima, existe uma região aonde os modelos obtem o m
 
 Nos resultados apresentados a cima é possível perceber que a adição da variável "Idade" não aumentou o nível de acurácia dos modelos, de maneira que o modelo adotado para regressão com as três variáveis será o mesmo na etápa anterior, ou seja:
 
-![Comparação resultados para dados de treinamento e de teste](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/r_square_3.png)
+
+![modelo 2](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model2.png)
+
 
 4) Agora os resultados obtidos deve ser coparado com um modelo baseado na teória médica:
 
+Se compararmos o modelo escolido como melhor dentre todas as regreções com o proposto pela "American College of Sports
+Medicine" obteremos o seguinte resultado:
 
+```
+>>> r2_score(yr34,y_ACSM)
+0.90139352984810062
+>>> r2_score(yr234,y_myModel)
+0.89900747095256661
+
+```
+A pesar dos resultados serem praticamente equivalentes o modelo que apresenta maior poder explicativo deve ser sempre preferido, assim o modelo proposto pelos expecialista tem maior valor.
+
+# II)  Gaussiana multivariada:
 
 # Apêndice:
 
