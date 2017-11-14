@@ -131,7 +131,7 @@ Uma vez entendido o que é o NLL é possivel se compriender como os modelos (que
 
 Aqui fica claro como o R² se relaciona com o NLL uma vez que ambos são baseados no RSS (Residual Sum of Squares). Um plot da variação do R² (dos dados de teste e trainamento) para os modelos testados:
 
-![R-Squared definição](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/testXtrain_result.png)
+![Comparação resultados para dados de treinamento e de teste](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/testXtrain_result.png)
 
 ```
 y1=[0.7750754467,0.7754524946,0.7754539306,0.7757899819,0.7759189671,0.775985176,0.7760899583]
@@ -146,7 +146,15 @@ Assim, usando só a carga como input, o modelo escolhido é:
  
 ![R-Squared definição](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model1.png)
 
-2) A seguir repetiremos a análise, mas utilizando as variáveis 
+2) A seguir repetiremos a análise, mas utilizando as variáveis de "Peso" e "Carga" para regredir "VO2":
+
+![Comparação resultados para dados de treinamento e de teste](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/r_square_2.png)
+
+Como podemos ver na imagem a cima, existe uma região aonde os modelos obtem o melhor resultado. Essa região se inícia nas funções com termos de segundo grau, por isso o modelo escolhido para regressão de VO2 a partir de Carga e Peso:
+
+![modelo 2](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model2.png)
+
+3)
 
 # Apêndice:
 
