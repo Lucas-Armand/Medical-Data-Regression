@@ -154,7 +154,17 @@ Como podemos ver na imagem a cima, existe uma região aonde os modelos obtem o m
 
 ![modelo 2](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model2.png)
 
-3)
+3) Agora uma discussão análoga pode ser executada para uma regressão de "Idade","Peso" e "Carga":
+
+![Comparação resultados para dados de treinamento e de teste](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/r_square_3.png)
+
+Nos resultados apresentados a cima é possível perceber que a adição da variável "Idade" não aumentou o nível de acurácia dos modelos, de maneira que o modelo adotado para regressão com as três variáveis será o mesmo na etápa anterior, ou seja:
+
+![Comparação resultados para dados de treinamento e de teste](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/r_square_3.png)
+
+4) Agora os resultados obtidos deve ser coparado com um modelo baseado na teória médica:
+
+
 
 # Apêndice:
 
