@@ -206,6 +206,40 @@ Um exemplo bidimensional é interessante justamente por que é possvel realizar 
 
 ## 2) Modelo de Gaussiana multivariada 3-dimenssional
 
+A seguir iremos regredir o mesmo tipo de modelo usando como base "Peso (kg)", "Carga Final" e "VO2 medido máximo (mL/kg/min)":
+
+```
+mean:
+Peso (kg)                         85.812210
+Carga Final                      170.897700
+VO2 medido máximo (mL/kg/min)     29.187956
+
+covariance:
+                                Peso (kg)  Carga Final  VO2 medido máximo (mL/kg/min)
+Peso (kg)                      217.195456   183.404173         -27.332390
+Carga Final                    183.404173  4864.671596         645.688994
+VO2 medido máximo (mL/kg/min)  -27.332390   645.688994         110.573043 
+
+```
+Para entender um pouco mais as propriedades desse tipo de modelo vamos olhar para os resultados em alguns pontos: 
+
+![Pontos escolhidos](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/pontos_gauss_quetion2.png)
+
+Arbitráriamente foram selecionados os pontos:
+
+Peso | Carga
+---- | -----
+60   | 100
+80   | 200
+100  | 300
+
+Para esses pontos temos as seguintes distribuições de VO2:
+
+![Plot 1](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/plot_V02_60_100.png)
+![Plot 2](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/plot_V02_80_200.png)
+![Plot 3](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/plot_V02_100_300.png)
+
+
 # Apêndice:
 
 
