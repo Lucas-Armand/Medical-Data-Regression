@@ -180,6 +180,32 @@ A pesar dos resultados serem praticamente equivalentes o modelo que apresenta ma
 
 # II)  Gaussiana multivariada:
 
+## 1) Modelo de Gaussiana multivariada bidimenssional
+O próximo modelo é uma gaussiana multivariada. Na teoria de probabilidade e nas estatísticas, a distribuição normal multivariada (ou distribuição gaussiana multivariada) é uma generalização da distribuição normal univariada para maiores dimensões. A Hipótese básica que as features são normalmente destribuidas (numa análise univariável) e que são linearmente correlacionadas. 
+
+Se realizarmos uma regressão utilizando as variáveis "Carga Final" e "VO2 medido" como base de dados,  usando os dados de treinamento, chegaremos aos resultados:
+
+```
+>>> mean
+Carga Final                      170.897700
+VO2 medido máximo (mL/kg/min)     29.187956
+dtype: float64
+
+>>> covarr
+                               Carga Final  VO2 medido máximo (mL/kg/min)
+Carga Final                    4864.671596                     645.688994
+VO2 medido máximo (mL/kg/min)   645.688994                     110.573043
+
+```
+Aonde os parâmetros do modelo são as médias das features e a matriz de covariância (análogo ao caso univariável).
+De maneira que se plotarmos o modelo sobre a base de dados teremos o seguinte resultado:
+
+![Modelo de Gaussiana Multivariada 2 dimessões](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model_gauss_plus_scatter.png)
+
+Um exemplo bidimensional é interessante justamente por que é possvel realizar representações como essas apresentadas a cima. Nessas imagens é possivel perceber que aparentimente o modelo é razoávelmente adequado aos dodos. A seguir implementações com uma dimensionalidades maiores serão feitas e dai será discutido a acurácio e outros aspectos relevantes desse tipo de modelo.
+
+## 2) Modelo de Gaussiana multivariada 3-dimenssional
+
 # Apêndice:
 
 
