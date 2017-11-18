@@ -259,6 +259,8 @@ Dessa maneira obtemos as funções de probabilidade para os pontos sitados a cim
 
 
 
+
+
 # Apêndice:
 
 
