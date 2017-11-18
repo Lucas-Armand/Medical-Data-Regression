@@ -251,7 +251,11 @@ Essas funções de probabilidade são obtidas através de probabilidade condicio
 
 ![Formula da destribuição gaussiana](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/gauss_form.png)
 
+Considerando a probabilidade condicional:
 
+![Probabilidade condicional](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/condicional_form.png)
+
+Dessa maneira obtemos as funções de probabilidade para os pontos sitados a cima. Porém, se objetivarmos tranf
 
 # Apêndice:
 
