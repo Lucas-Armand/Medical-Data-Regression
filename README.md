@@ -227,18 +227,24 @@ Para entender um pouco mais as propriedades desse tipo de modelo vamos olhar par
 
 Arbitráriamente foram selecionados os pontos:
 
-Peso | Carga
----- | -----
-60   | 100
-80   | 200
-100  | 300
+Ponto | Peso | Carga
+----  | ---- | -----
+ 1    | 60   | 100
+ 2    | 80   | 200
+ 3    | 100  | 300
 
 Para esses pontos temos as seguintes distribuições de VO2:
 
+Ponto 1:
 ![Plot 1](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/plot_V02_60_100.png)
+
+Ponto 2:
 ![Plot 2](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/plot_V02_80_200.png)
+
+Ponto 3:
 ![Plot 3](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/plot_V02_100_300.png)
 
+Essas funções de probabilidade são obtidas através de probabilidade condicional, ou seja, sabendo que a 
 
 # Apêndice:
 
