@@ -236,15 +236,22 @@ Ponto | Peso | Carga
 Para esses pontos temos as seguintes distribuições de VO2:
 
 Ponto 1:
+
 ![Plot 1](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/plot_V02_60_100.png)
 
 Ponto 2:
+
 ![Plot 2](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/plot_V02_80_200.png)
 
 Ponto 3:
+
 ![Plot 3](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/plot_V02_100_300.png)
 
-Essas funções de probabilidade são obtidas através de probabilidade condicional, ou seja, sabendo que a 
+Essas funções de probabilidade são obtidas através de probabilidade condicional, ou seja, sabendo que a função de probabilidade da gaussiana multivariada é:
+
+![Formula da destribuição gaussiana](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/gauss_form.png)
+
+
 
 # Apêndice:
 
