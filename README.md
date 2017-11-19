@@ -257,6 +257,14 @@ Considerando a probabilidade condicional:
 
 Dessa maneira obtemos as funções de probabilidade para os pontos sitados a cima. Porém, muitas das vezes não se deseja obter a destribuição em si, mas se realizar alguma sorte de predição sobrea a variável. Nesse sentido esse método é diferente do análisado anteriormente porque além de ser possível escolher o valor mais provável (no caso a média) para ser o "resultado" da regressão, mas é possível estabelecer um nível de conviança se a esse resultado for assocaido um intervalo e a probabilidade do resultado estar dentro desse intervalo. A seguir uma tabela que apresenta o resultado obtidos a partir dos dois modelos explorados até esse ponto.
 
+25.4640707877
+0.795278429671
+
+34.7486685308
+0.795278429671
+
+44.0332662739
+0.795278429671
 
 
 
