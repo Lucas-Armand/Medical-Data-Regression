@@ -258,29 +258,12 @@ Considerando a probabilidade condicional:
 Dessa maneira obtemos as funções de probabilidade para os pontos sitados a cima. Porém, muitas das vezes não se deseja obter a destribuição em si, mas se realizar alguma sorte de predição sobrea a variável. Nesse sentido esse método é diferente do análisado anteriormente porque além de ser possível escolher o valor mais provável (no caso a média) para ser o "resultado" da regressão, mas é possível estabelecer um nível de conviança se a esse resultado for assocaido um intervalo e a probabilidade do resultado estar dentro desse intervalo. A seguir uma tabela que apresenta o resultado obtidos a partir dos dois modelos explorados até esse ponto.
 
 
-Linear| Gaussiana
- ---  | média| interv.
+Linear| Gauss média| Gauss interv.
 ----  | ---- | -----
- 1    | 60   | 100
- 2    | 80   | 200
- 3    | 100  | 300
+26.91 | 25.46  | 0.7952
+35.24 | 34.74   | 0.7952
+42.70 | 44.03  | 0.7952
  
-25.4640707877
-0.795278429671
-
-34.7486685308
-0.795278429671
-
-44.0332662739
-0.795278429671
-
-array([ 26.91749041])
->>> regr.predict(y)
-array([ 35.24028884])
->>> y = [[300,100,300**2,100**2,1]]
->>> regr.predict(y)
-array([ 42.70280433])
-
 
 
 # Apêndice:
