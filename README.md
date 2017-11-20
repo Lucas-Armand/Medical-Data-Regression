@@ -259,7 +259,7 @@ Dessa maneira obtemos as funções de probabilidade para os pontos sitados a cim
 
 
 Linear| Gaussiana
-      | média| interv.
+ ---  | média| interv.
 ----  | ---- | -----
  1    | 60   | 100
  2    | 80   | 200
