@@ -258,8 +258,15 @@ Linear| Gauss média| Gauss interv.
 26.91 | 25.46  | 0.7952
 35.24 | 34.74   | 0.7952
 42.70 | 44.03  | 0.7952
- 
 
+
+# Referencias:
+
+Site da Matéria "Apredizado de Maquinas" - http://www.land.ufrj.br/~classes/machine-learning-2017
+
+Repositório oficial da Lista - http://www.land.ufrj.br/~classes/machine-learning-2017/protected/listas/lista3_4.pdf
+
+Código com toda implentação em python - https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/lista3.py
 
 # Apêndice:
 
