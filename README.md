@@ -113,7 +113,7 @@ Resultados das regressões estão no apêndice, assim como os sumários das regr
 
 A seguir segue uma breve discussão sobre a relevância do NLL(w) num estudo do caso do modelo de regressão linear:
 
-![Imagens scaneadas do caderno](?)
+![Imagens scaneadas do caderno](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/demonst_1.png)
 
 Uma vez entendido o que é o NLL é possível se compreender como os modelos (que os resultados foram plotados no inicio dessa seção) foram obtidos. Aqui talvez fosse interessante apresentar o NLL para cada modelo, mas foi feito a opção por usar o R² para compara os resultados do múltiplos modelos. Isso porque, na visão do autor, ele oferece um resultado de mais fácil compreensão sobre a capacidade explicativa dos modelos, além de ser "normalizado" (a ordem do resultado não é influencia pela número de pontos nem pela ordem de grandeza de "y". R² é definido como:
 
@@ -188,6 +188,11 @@ VO2 medido máximo (mL/kg/min)   645.688994                     110.573043
 
 ```
 Aonde os parâmetros do modelo são as médias das features e a matriz de covariância (análogo ao caso univariável).
+Podemo fazer isso por isso:
+
+
+![Imagens scaneadas do caderno](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/demonst_2.png)
+
 De maneira que se plotarmos o modelo sobre a base de dados teremos o seguinte resultado:
 
 ![Modelo de Gaussiana Multivariada 2 dimessões](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model_gauss_plus_scatter.png)
