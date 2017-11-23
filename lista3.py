@@ -10,8 +10,12 @@ from scipy.stats import norm
 from scipy.stats.mstats import normaltest
 from sklearn.neural_network import MLPRegressor
 from pandas.tools.plotting import scatter_matrix
+from scipy.stats import multivariate_normal
+from sklearn import linear_model
+from sklearn.metrics import r2_score
+from scipy.optimize import minimize
 
-df = pd.read_csv('database.txt','\t', decimal = '.')
+df = pd.read_csv('database.txt',';', decimal = '.')
 columns = df.columns
 
 # Vizualization:
@@ -21,285 +25,311 @@ columns = df.columns
 # len(df)
 # df.hist()
 # plt.show()
-# scatter_matrix(df)
+# scatter_matrix(df)	
 # plt.show()
 # correlation = df.corr()
 # sbn.heatmap(correlation)
 # plt.show()
 
 # Test Vector:
-test = [1 , 0 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 0 , 0 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1]
+trnn = [1 , 0 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 0 , 0 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 0 , 0 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1]
+
+trnn = np.array(trnn)
+test = 1-trnn
+test = test == 1
+trnn = trnn == 1
 
 
+df_test = df[test]
+df_trnn = df[trnn]
 
-df = df.drop('COI',1)	
-df = df.drop('V0003_p.1',1)
-df['diff_REC'] = df['REC_N+1']-df['REC_N']
-df['diff_COI'] = df['COI_N+1']-df['COI_N']
-df['diff_VBPI'] = df['VBPI_N+1']-df['VBPI_N']
-columns = df.columns
+# Regressão de VO2 usando Carga:
 
-# Para eliminar nan e inf:
-df = df[np.invert(np.isnan(df['diff_COI']))]
-df = df[np.invert(np.isinf(df['diff_COI']))]
-df = df[np.invert(np.isnan(df['diff_REC']))]
-df = df[np.invert(np.isinf(df['diff_REC']))]
-df = df[np.invert(np.isnan(df['diff_VBPI']))]
-df = df[np.invert(np.isinf(df['diff_VBPI']))]
+	# Gerando o dataframe para receber as variáveis da coluna '3' e suas variações  para a regressão:
+df_r34 = pd.DataFrame()
+df_test_r34 = pd.DataFrame()
+
+	# Construindo resultados para polinômios de diferentes grauss
+for i in range(1,9):
+	df_r34['Carga Final**'+str(i)] = df_trnn[columns[2]]**i
+for i in range(1,9):
+	df_test_r34['Carga Final**'+str(i)] = df_test[columns[2]]**i
+
+	# Definindo conjunto "X" e "y" para treinar o algorítimo:
+Xr34 = df_r34
+Yr34 = df_trnn['VO2 medido máximo (mL/kg/min)']
+columns_x = Xr34.columns
 
 
-# Para eleminar outfitting:
-df = df[df['diff_REC']>(df['diff_REC'].mean()-3*df['diff_REC'].std())]
-df = df[df['diff_REC']<(df['diff_REC'].mean()+3*df['diff_REC'].std())]
-df = df[df['diff_COI']>(df['diff_COI'].mean()-3*df['diff_COI'].std())]
-df = df[df['diff_COI']<(df['diff_COI'].mean()+3*df['diff_COI'].std())]
-df = df[df['diff_VBPI']<(df['diff_VBPI'].mean()+3*df['diff_VBPI'].std())]
-df = df[df['diff_VBPI']>(df['diff_VBPI'].mean()-3*df['diff_VBPI'].std())]
+	# Definindo conjunto "X" e "y" para testar o algorítimo:
+xr34 = df_test_r34
+yr34 = df_test['VO2 medido máximo (mL/kg/min)']
 
-# Matriz de correlação
-correlation = df.corr()
-# Se quiser observar a matriz de correlação:
-# seaborn.heatmap(correlation)
+
+	# Construindo o vetor constante
+const = pd.DataFrame({'const':np.ones(len(Xr34))},index = Xr34.index)
+const2 = pd.DataFrame({'const':np.ones(len(xr34))},index = xr34.index)
+
+for i in range(1,10):
+	print i
+	print ''
+	results = sm.OLS(Yr34, Xr34[columns_x[0:i]].join(const)).fit()
+	print results.summary()
+#	print results.predict()
+
+regr = linear_model.LinearRegression()
+
+# resultados (1):
+for i in range(1,10):
+	print i
+	print ''
+	regr.fit(Xr34[columns_x[0:i]].join(const), Yr34)
+	print 'R² Trainamento:'
+	print regr.score(Xr34[columns_x[0:i]].join(const), Yr34)
+	print regr.get_params()
+	print 'R² Teste:'
+	print regr.score(xr34[columns_x[0:i]].join(const2), yr34)
+#	print results.predict()
+
+
+# Prot Rsquarde train and test:
+# 
+# y1=[0.7750754467,0.7754524946,0.7754539306,0.7757899819,0.7759189671,0.775985176,0.7760899583]
+# y2=[0.7454585045,0.7455548709,0.7454815363,0.7451629196,0.7436750232,0.7439609531,0.7434698284]
+# x = range(1,8)
+# fig, ax1 = plt.subplots()
+# ax1.plot(x, y1, 'b-')
+# ax1.set_ylabel('R^2 Treinamento', color='b')
+# ax2 = ax1.twinx()
+# ax2.plot(x, y2, 'r-')
+# ax2.set_ylabel('R^2 Teste', color='r')
+# fig.tight_layout()
 # plt.show()
 
-# Análise de correlação
-corrREC= correlation['diff_REC'][:-8]
-corrCOI= correlation['diff_COI'][:-8]
-corrVBPI= correlation['diff_VBPI'][:-8]
 
-corrREC=corrREC.abs()
-corrCOI=corrCOI.abs()
-corrVBPI=corrVBPI.abs()
+# Parte 2:
+# Regressão de VO2 usando Carga, Peso:
 
-corrREC.sort_values(inplace=True)
-corrCOI.sort_values(inplace=True)
-corrVBPI.sort_values(inplace=True)
+	# Gerando o dataframe para receber as variáveis da coluna '3' e suas variações  para a regressão:
+df_r234 = pd.DataFrame()
+df_test_r234 = pd.DataFrame()
 
+	# Construindo resultados para polinômios de diferentes grauss
+for i in range(1,10):
+	df_r234['Carga Final**'+str(i)] = df_trnn[columns[2]]**i
+	df_r234['Peso**'+str(i)] = df_trnn[columns[1]]**i
 
-# Escolha das features para os modelos:
+for i in range(1,10):
+	df_test_r234['Carga Final**'+str(i)] = df_test[columns[2]]**i
+	df_test_r234['Peso**'+str(i)] = df_test[columns[1]]**i
 
-featREC = list(corrREC.index[-10:]) 
-featCOI = list(corrCOI.index[-10:]) 
-featVBPI = list(corrVBPI.index[-10:]) 
-
-# Construção e teste dos modelos:
-Xr = df[featREC]
-Xc = df[featCOI]
-Xv = df[featVBPI]
-yr = df['diff_REC']
-yc = df['diff_COI']
-yv = df['diff_VBPI']
-
-	# O modelo de regreção linear precisa da adição de um termo constante
-const = pd.DataFrame({'const':np.ones(len(Xr))},index = Xr.index)
-
-resultsCOI = sm.OLS(yc, Xc.join(const)).fit()
-resultsREC = sm.OLS(yr, Xr.join(const)).fit()
-resultsVBPI = sm.OLS(yv, Xv.join(const)).fit()
-# Para acessar os resultados basta:
-resultsCOI.summary()
-resultsREC.summary()
-resultsVBPI.summary()
-
-NN = MLPRegressor(hidden_layer_sizes=(10,10,10),  activation='relu', solver='adam', alpha=0.0001, batch_size='auto', learning_rate='constant', learning_rate_init=0.001, power_t=0.5, max_iter=1000, shuffle=True, random_state=9, tol=0.0001, verbose=False, warm_start=False, momentum=0.9, nesterovs_momentum=True, early_stopping=False, validation_fraction=0.1, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
-
-# Resultados de R² para as Redes Neurais:
-NN.fit(Xr,yr)
-NN.score(Xr,yr)
-NN.fit(Xc,yc)
-NN.score(Xc,yc)
-NN.fit(Xv,yv)
-NN.score(Xv,yv)
-
-# Considerar novas variáveis:
-seems_relev = ['V0058_p', 'V0081_p', 'V0082_p', 'V0084_p', 'V0086_p', 'V0087_p', 'V0089_p', 'Lim_Simples', 'S10', 'S11', 'S12', 'S13', 'S14', 'S15', 'S16', 'S17', 'S18', 'S19', 'S20', 'S21', 'S22', 'S23', 'S24', 'S25', 'S26', 'S27', 'S28', 'S29', 'S30', 'S31', 'S32', 'S33']
-	
-new_features=[]
-for feature in seems_relev:
-	if np.isinf(df[feature]).mean()>0:
-		df[feature+'Inf'] = np.isinf(df[feature])*1
-		new_features.append(feature+'Inf')
-	if np.isnan(df[feature]).mean()>0:
-		df[feature+'NaN'] = np.isnan(df[feature])*1
-		new_features.append(feature+'NaN')
-	df[feature] = df[feature].replace(np.inf, np.nan)
-	df[feature] = df[feature].fillna(0)
-
-want_see = seems_relev+new_features
-
-print new_features
+	# Definindo conjunto "X" e "y" para treinar o algorítimo:
+Xr234 = df_r234
+Yr234 = df_trnn['VO2 medido máximo (mL/kg/min)']
+columns_x = Xr234.columns
 
 
-# Novos resultados para modelos com adição de novas variáveis :
-Xc = df[featCOI+want_see[:8]]
-Xr = df[featREC+want_see[:8]]
-Xv = df[featVBPI+want_see[:8]]
-
-resultsCOI = sm.OLS(yc, Xc.join(const)).fit()
-resultsREC = sm.OLS(yr, Xr.join(const)).fit()
-resultsVBPI = sm.OLS(yv, Xv.join(const)).fit()
+	# Definindo conjunto "X" e "y" para testar o algorítimo:
+xr234 = df_test_r234
+yr234 = df_test['VO2 medido máximo (mL/kg/min)']
 
 
-print ''
-print 'R² para Linear Regression com adição de novas variáveis ao modelo:'
-print resultsCOI.rsquared
-print resultsREC.rsquared
-print resultsVBPI.rsquared
+	# Construindo o vetor constante
+const = pd.DataFrame({'const':np.ones(len(Xr234))},index = Xr234.index)
+const2 = pd.DataFrame({'const':np.ones(len(xr234))},index = xr234.index)
 
-print '' 
-print 'R² para Rede Neurais com adição de novas variáveis ao modelo:'
-NN.fit(Xc,yc)
-print NN.score(Xc,yc)
-NN.fit(Xr,yr)
-print NN.score(Xr,yr)
-NN.fit(Xv,yv)
-print NN.score(Xv,yv)
+for i in range(1,3):
+	print i
+	print ''
+	print ''
+	print ''
+	print Xr234[columns_x[0:2*i]].join(const).head()
+	print ''
+	results = sm.OLS(Yr234, Xr234[columns_x[0:2*i]].join(const)).fit()
+	print results.summary()
+#	print results.predict()
 
-# Lucas' Model:
-class LucasModel:
-	def __init__(self,x,y,delt,feat_names=None,targ_names=None):
-		self.X = x
-		self.Y = y
-		if feat_names:
-			self.fN = feat_names
-		else:
-			self.fN = self.X.columns
-		if targ_names:
-			self.tN = targ_names
-		else:
-			self.tN = self.Y.columns
-		self.d =(y.max()-y.min())*delt
-	def fit(self):
-		X=self.X
-		Y=self.Y	
-		tN=self.tN
-		fN=self.fN
-		Table = {}
-		MU = Y.mean()
-		STD = Y.std()
-		PROB = 2*(norm.cdf(MU+self.d,MU,STD)-0.5)
-		PROB = {tN[i]:PROB[i] for i in range(len(tN))}
-		for t in tN:
-			Table[t] = {}
-			for f in fN:
-				Table[t][f] = {}
-				for i in (0,1):
-					data = Y[t][X[f]==i]
-					if len(data)>10:
-						result = normaltest(data)
-						if result[1] <0.01:
-							mu = data.mean()
-							std = data.std ()
-							prob = 2*(norm.cdf(mu+self.d[t],mu,std)-0.5)
-							Table[t][f][i] = {'E':mu,'p':prob}
-						else:
-							Table[t][f][i] = {'E':MU[t],'p':PROB[t]}
-					else:
-						
-						Table[t][f][i] = {'E':MU[t],'p':PROB[t]}
-		self.Table = Table
-		return Table
-	def predict(self,df):
-		Table = self.Table
-		tN = self.tN
-		fN = self.fN
-		estimation = {t:[] for t in tN}
-		n = len(df)
-		for i in range(n):
-			print i,' of ',n  
-			for t in tN:
-				esperanca = 0
-				normalize = 0
-				for f in fN:	
-					mu = Table[t][f][int(df[i:i+1][f])]['E']
-					prob = Table[t][f][int(df[i:i+1][f])]['p']
-					esperanca += mu*prob
-					normalize += prob
-				valor_esperado = esperanca/normalize
-				estimation[t].append(valor_esperado)
-		for t in tN:
-			df[t+'_estm'] = estimation[t]
-		return df				
+regr = linear_model.LinearRegression()
 
-Y = df[['diff_COI','diff_REC','diff_VBPI']]
-lm = LucasModel(df[want_see[8:]],Y,0.01)
-lm.fit()
-df = lm.predict(df)
+# Resultados (2):
+for i in range(1,10):
+	print i
+	print ''
+	regr.fit(Xr234[columns_x[0:2*i]].join(const), Yr234)
+	print 'R² Trainamento:'
+	print regr.score(Xr234[columns_x[0:i*2]].join(const), Yr234)
+	print regr.get_params()
+	print 'R² Teste:'
+	print regr.score(xr234[columns_x[0:i*2]].join(const2), yr234)
+#	print results.predict()
+
+# Prot R-squarde train and test:
+# 
+#y1=[0.8876877002,0.899007471,0.8992172158,0.8998584384,0.9002693898,0.9002546785,0.9001756381,0.8991983449,0.8785888845]
+#y2=[0.8899233697,0.9002093482,0.9007943522,0.9020746338,0.9021153518,0.9021477198,0.901987438,0.9012318944,0.8811719811]
+#x = range(1,10)
+#fig, ax1 = plt.subplots()
+#ax1.plot(x, y1, 'b-')
+#ax1.set_ylabel('R^2 Treinamento', color='b')
+#ax2 = ax1.twinx()
+#ax2.plot(x, y2, 'r-')
+#ax2.set_ylabel('R^2 Teste', color='r')
+#fig.tight_layout()
+#plt.show()
+
+# Parte 3:
+# Regressão de VO2 usando Carga, Peso, Idade:
+
+	# Gerando o dataframe para receber as variáveis da coluna '3' e suas variações  para a regressão:
+df_r1234 = pd.DataFrame()
+df_test_r1234 = pd.DataFrame()
+
+	# Construindo resultados para polinômios de diferentes grauss
+for i in range(1,10):
+ df_r1234['Carga Final**'+str(i)] = df_trnn[columns[2]]**i
+ df_r1234['Peso**'+str(i)] = df_trnn[columns[1]]**i
+ df_r1234['Idade**'+str(i)] = df_trnn[columns[0]]**i
 
 
-# Resulta com estimador:
-Xc = df[featCOI+want_see[:8]+list(df.columns[-3:])]
-Xr = df[featREC+want_see[:8]+list(df.columns[-3:])]
-Xv = df[featVBPI+want_see+list(df.columns[-3:])]
-
-resultsCOI = sm.OLS(yc, Xc.join(const)).fit()
-resultsREC = sm.OLS(yr, Xr.join(const)).fit()
-resultsVBPI = sm.OLS(yv, Xv.join(const)).fit()
+for i in range(1,10):
+ df_test_r1234['Carga Final**'+str(i)] = df_test[columns[2]]**i
+ df_test_r1234['Peso**'+str(i)] = df_test[columns[1]]**i
+ df_test_r1234['Idade**'+str(i)] = df_test[columns[0]]**i
 
 
-print ''
-print 'R² para Linear Regression com adição do estimador:'
-print resultsCOI.rsquared
-print resultsREC.rsquared
-print resultsVBPI.rsquared
-
-print '' 
-print 'R² para Rede Neurais com adição do estimador:'
-NN.fit(Xc,yc)
-print NN.score(Xc,yc)
-NN.fit(Xr,yr)
-print NN.score(Xr,yr)
-NN.fit(Xv,yv)
-print NN.score(Xv,yv)
+	# Definindo conjunto "X" e "y" para treinar o algorítimo:
+Xr1234 = df_r1234
+Yr1234 = df_trnn['VO2 medido máximo (mL/kg/min)']
+columns_x = Xr1234.columns
 
 
-# Teste de Acurácia:
-
-rec_feat= ['Lim_Simples','Desp_Op','COI_N','REC_N','VTI_N','VBPI_N','diff_REC_estm']
-vbpi_feat = ['V0033_p','Gas_Pess','Desp_Op','VTI_N','COI_N','REC_N','VBPI_N','Lim_Simples','diff_VBPI_estm']
-coi_feat = ['Lim_Simples','COI_N' ,'Desp_Op','VBPI_N','VTI_N','diff_COI_estm']
+	# Definindo conjunto "X" e "y" para testar o algorítimo:
+xr1234 = df_test_r1234
+yr1234 = df_test['VO2 medido máximo (mL/kg/min)']
 
 
-# Data Split
-NN = MLPRegressor(hidden_layer_sizes=(10,10,10),  activation='relu', solver='adam', alpha=0.0001, batch_size='auto', learning_rate='constant', learning_rate_init=0.001, power_t=0.5, max_iter=1000, shuffle=True, random_state=9, tol=0.0001, verbose=False, warm_start=False, momentum=0.9, nesterovs_momentum=True, early_stopping=False, validation_fraction=0.1, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
+	# Construindo o vetor constante
+const = pd.DataFrame({'const':np.ones(len(Xr1234))},index = Xr1234.index)
+const2 = pd.DataFrame({'const':np.ones(len(xr1234))},index = xr1234.index)
+
+#for i in range(1,8):
+#	print i
+#	print ''
+#	results = sm.OLS(Yr1234, Xr1234[columns_x[0:2*i]].join(const)).fit()
+#	print results.summary()
+#	print results.predict()
+
+regr = linear_model.LinearRegression()
+
+# Resultados (3):
+for i in range(1,10):
+ print i
+ print ''
+ regr.fit(Xr1234[columns_x[0:i*3]].join(const), Yr1234)
+ print 'R² Trainamento:'
+ print regr.score(Xr1234[columns_x[0:i*3]].join(const), Yr1234)
+ print regr.get_params()
+ print 'R² Teste:'
+ print regr.score(xr1234[columns_x[0:i*3]].join(const2), yr1234)
+#	print results.predict()
+#y1=[0.8913319529,0.9004000064,0.9020204391,0.9030626757,0.9030755474,0.9030846293,0.903019415,0.9025699331,0.8882040509]
+#y2=[0.8899630108,0.9000797872,0.9008599332,0.9016978773,0.9018695847,0.9017418306,0.9018294547,0.9013785525,0.8841431482]
+#
+#x = range(1,len(y1)+1)
+#fig, ax1 = plt.subplots()
+#ax1.plot(x, y1, 'b-')
+#ax1.set_ylabel('R^2 Treinamento', color='b')
+#ax2 = ax1.twinx()
+#ax2.plot(x, y2, 'r-')
+#ax2.set_ylabel('R^2 Teste', color='r')
+#fig.tight_layout()
+#plt.show()
+
+# Questão 2:
+
+# Parte 1
+dfg34_trnn = df_trnn[['Carga Final','VO2 medido máximo (mL/kg/min)']]
+dfg34_test = df_test[['Carga Final','VO2 medido máximo (mL/kg/min)']]
+mean = dfg34_trnn.mean()
+covarr = dfg34_trnn.cov()
+
+x, y = np.mgrid[0:500:1, 0:80:1]
+pos = np.empty(x.shape + (2,))
+pos[:, :, 0] = x; pos[:, :, 1] = y
+rv = multivariate_normal(mean,cov=covarr)
+plt.contourf(x, y, rv.pdf(pos))
+
+col = dfg34_trnn.columns
+plt.scatter(dfg34_trnn[col[0]],list(dfg34_trnn[col[1]]),'b')
+plt.scatter(dfg34_test[col[0]],list(dfg34_test[col[1]]),'r')
+
+plt.show()
 
 
-Xc = df[coi_feat][:-218]
-Xr = df[rec_feat][:-218]
-Xv = df[vbpi_feat][:-218]
-Yr = df['diff_REC'][:-218]
-Yc = df['diff_COI'][:-218]
-Yv = df['diff_VBPI'][:-218]
-yr = df['diff_REC'][-218:]
-yc = df['diff_COI'][-218:]
-yv = df['diff_VBPI'][-218:]
-xc = df[coi_feat][-218:]
-xr = df[rec_feat][-218:]
-xv = df[vbpi_feat][-218:]
-NN.fit(Xc,list(Yc))
-print NN.score(xc,yc)
-NN.fit(Xr,list(Yr))
-print NN.score(xr,yr)
-NN.fit(Xv,list(Yv))
-print NN.score(xv,yv)
+# Parte 2
 
-#CrosValidation k-fold (k=10)
+dfg234_trnn = df_trnn[['Peso (kg)', 'Carga Final', 'VO2 medido máximo (mL/kg/min)']]
+dfg234_test = df_test[['Peso (kg)', 'Carga Final', 'VO2 medido máximo (mL/kg/min)']]
+mean234 = dfg234_trnn.mean()
+covarr234 = dfg234_trnn.cov()
+rv = multivariate_normal(mean234,cov=covarr234)
+z = np.mgrid[0:80:1]
+pos = np.empty(z.shape+(3,))
+pos [:,2] = z
 
-scores = cross_val_score(NN, df[vbpi_feat], df['diff_VBPI'], cv=10)
-print scores
-print scores.mean()
-scores = cross_val_score(NN, df[rec_feat], df['diff_REC'], cv=10)
-print scores
-print scores.mean()
-scores = cross_val_score(NN, df[coi_feat], df['diff_COI'], cv=10)
-print scores
-print scores.mean()
+x = [60,80,100]
+y = [100,200,300]
+for i in range(3):
+	pos[:,0]=x[i];pos[:,1]=y[i]
+	P_z = rv.pdf(pos)
+	norm = np.trapz(P_z)
+	P_z_cond = P_z/norm
+	#plt.plot(P_z_cond)
+	mean = sum(P_z_cond*z)
+	print mean
+	interval = [mean-5,mean+5]
+	delt = np.mgrid[interval[0]:interval[1]:1]
+	points = np.empty(delt.shape+(3,))
+	points[:,2] = delt
+	points[:,0]=x[i];points[:,1]=y[i]
+	print points
+	P_z_cond = rv.pdf(points)/norm
+	prob = np.trapz(P_z_cond)
+	print prob
+	print ''
 
-# Para gerar os plots dos fetures alterados e novos features:
-#f, axarray = plt.subplots(6, 6, sharex='col', sharey='row')
-#targets = ['diff_COI','diff_REC','diff_VBPI']
-#for i in range(6):
-#	for j in range (6):
-#		axarray[i][j].scatter(df[targets[j%3]],df[want_see[28+i*2+j/3]], marker = '.')
-#		axarray[i][j].set_title(want_see[28+i*2+j/3]+' '+targets[j%3])
+# Parte 3
+
+ind = dfg234_test.index
+n = len(ind)
+y_pred = []
+for i in range(n):
+	point = dfg234_test.loc[ind[i]][:2]
+	res = minimize(lambda x: -rv.pdf([point[0],point[1],x]),50,method='powell')
+	mean = res.x
+	print point[0],point[1],mean
+	y_pred.append(mean)
+y_true = dfg234_test[col[1]]
+print ' Resultado do modelo gaussiano:'
+print r2_score(y_true, y_pred)
+
+
+
+# Questão 3:
+
+# Parte 1
+
+df_test_18_40 = df_test[df_test['IDADE (anos)']<40]
+df_test_40_all = df_test[df_test['IDADE (anos)']>=40]
+df_test_40_inf = df_test[df_test['IDADE (anos)']>=40]
+df_test_40_65 = df_test_40_inf[df_test_40_inf['IDADE (anos)']<65]
+df_test_65_inf = df_test_40_inf[df_test_40_inf['IDADE (anos)']>=65]
+
+
+df_trnn_18_40 = df_trnn[df_trnn['IDADE (anos)']<40]
+df_trnn_40_all = df_trnn[df_trnn['IDADE (anos)']>=40]
+df_trnn_40_inf = df_trnn[df_trnn['IDADE (anos)']>=40]
+df_trnn_40_65 = df_trnn_40_inf[df_trnn_40_inf['IDADE (anos)']<65]
+df_trnn_65_inf = df_trnn_40_inf[df_trnn_40_inf['IDADE (anos)']>=65]
+
 
