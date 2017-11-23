@@ -1,4 +1,4 @@
-# Medical Data Regression - Lucas Armand
+# Medical Data Regression - Lucas Armand - Lista 3
 Este trabalho é um relatório que discute e analisa diversas técnicas de regressão e classificação realizadas sobre uma base de dados médicos reais a respeito da capacidade vascular dos pacientes, ele foi construído para avaliação dos professores Raimundo, Rosa e Daniel para compor o grau na disciplina Aprendizado de Máquina - CPS863 - 2017/3.
 
 ![Questions](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/questions.png)
