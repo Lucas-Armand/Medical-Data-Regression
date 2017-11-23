@@ -1,24 +1,14 @@
-# Medical-Data-Regression
-Este trabalho é um relatório que discute e análisa de diversars técincas de regressão e classificassão realizadas sobre uma base de dados médicos reais a respeito da capacidade vascular dos pacientes, ele foi construido para avaliação dos professores Raimundo, Rosa e Daniel para compor o grau na diciplina 
+# Medical Data Regression - Lucas Armand
+Este trabalho é um relatório que discute e analisa diversas técnicas de regressão e classificação realizadas sobre uma base de dados médicos reais a respeito da capacidade vascular dos pacientes, ele foi construído para avaliação dos professores Raimundo, Rosa e Daniel para compor o grau na disciplina Aprendizado de Máquina - CPS863 - 2017/3.
 
-"Nesta lista, iremos utilizar dados reais fornecidos gentilmente pelo Professor Claudio Gil Soares de Araujo (at ́e recentemente professor do Instituto do Cora ̧c ̃ao Edson Saad da UFRJ) da CLINIMEX,
-atrav ́es da aluna de doutorado da UFRJ Christina G. de Souza e Silva.  Os dados foram obtidos a partir  de  uma  extensa  base  de  dados  do  Prof.   Claudio  Gil,  coletada  durante  muitos  anos  e  usada
-em suas pesquisas.  Os dados mostram uma medida da condi ̧c ̃ao aer ́obica do paciente (o VO2 max) (por quilo de peso do indiv ́ıduo) e ainda as vari ́aveis idade, peso e a carga m ́axima atingida durante
-um teste de exerc ́ıcio  m ́aximo ao qual o paciente foi submetido.  (Os dados s ̃ao todos de pacientes masculinos.)   De  forma  bem  simples,  o  VOD2
-max  ́e  a  taxa  m ́axima  de  consumo  de  oxigˆenio  medida durante  um  teste  de  exerc ́ıcio  m ́aximo,  e  reflete  a  capacidade  aer ́obica  do  paciente,  expressa  em
-volume de oxigˆenio por massa corporal por minuto (ml/(Kg.min). E uma importante m ́etrica usada
-na avalia ̧c ̃ao cardiovascular de indiv ́ıduos [1].
+![Questions](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/questions.png)
 
-Nesta  lista  os  modelos  devem  prever  VO2 m ́aximo  de  pacientes  com  uma  dada  idade,  peso  e carga  m ́axima  atingida  durante  o  teste  de
-exerc ́ıcio  m ́aximo do  paciente.   Em  alguns  dos  modelos vocˆe dever ́a encontrar uma fun ̧c ̃ao adequada do VO2 m ́aximo em fun ̧c ̃ao das outras vari ́aveis (ou de
-um subconjunto delas).  Outros modelos s ̃ao mais evidentes para se encontrar a probabilidade de se encontrar o VO 2 m ́aximo dentro de uma faixa de valores,  a partir dos dados de entrada ou de um
-subconjunto deles.  Em outra quest ̃ao ser ́a solicitado que seja estimada a idade do paciente dado um subconjunto de vari ́aveis."
 
-## Vizualização dos Dados:
+## Visualização dos Dados:
 
-Inicialmente devemos construir um conhecimento mínimo dos dados que desejamos analisar, isso é feita atravez de uma análise exploratória dos dados. A seguir utilizaremos alguma tecnicas de vizualização para construir um entendimento sobre os dados
+Inicialmente devemos construir um conhecimento mínimo dos dados que desejamos analisar, isso é feita através de uma análise exploratória dos dados. A seguir utilizaremos alguma tecnicas de visualização para construir um entendimento sobre os dados
 
-A base de dados é composta por 1172 pontos cada um com quatro caracteristicas: Idade, Carga Final, Peso e VO2 (os dois primeros são variáveis inteiras e as demais são definidas no espaço do números reais). A seguir podemos ver os primeiros cinco pontos da base de dados:
+A base de dados é composta por 1172 pontos cada um com quatro características: Idade, Carga Final, Peso e VO2 (os dois primeiros são variáveis inteiras e as demais são definidas no espaço do números reais). A seguir podemos ver os primeiros cinco pontos da base de dados:
 
 ```
     IDADE (anos)  Peso (kg)  Carga Final  VO2 medido máximo (mL/kg/min)
@@ -46,11 +36,11 @@ max       91.000000   178.900000   432.000000                      73.333333
 
 Na tabela a cima podemos ver o máximo e o mínimo das cadaracterísticas armazenadas na base, o que nos permite conhecer um pouco sobre os individuo. Eles são homens entre 18 e 91 anos que pesam em média 86kg com desvio padrão de 15kg. A "Carga Final" varia entre [70,430] e "V02" entre [6,70]. Outro informação relevante sobre a base é que não existe valores indeterminados ("nan","NA", "inf",etc...) em nenhum ponto, isso facilitará análises futuras.
 
-Para entender melhor como esses dados estão destribuidos podemos construir histogramas da base de dados:
+Para entender melhor como esses dados estão distribuídos podemos construir histogramas da base de dados:
 
 ![Histograma das Variáveis da Base de Dados](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/hist.png)
 
-No histograma é possível perceber que em todas as características tem destribuições "bem comportadas" aparentando ter uma distribuição próxima a uma normal ou uma destribuição gamma. 
+No histograma é possível perceber que em todas as características tem distribuições "bem comportadas" aparentando ter uma distribuição próxima a uma normal ou uma distribuição gamma. 
 
 Outra análise que pode apresentar respostas interessantes é procurar correlações entre os dados,por isso será feito uma apresentação das correlações lineares entre as variáveis (por tabela de dados e 'heatmap') seguida de uma apresentação de um scaterplot da base de dados:
 
@@ -65,13 +55,13 @@ VO2 medido máximo (mL/kg/min)     -0.630072  -0.174401     0.878326            
 
 ![ScatterPlot todas as variáveis](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/scatter_all.png)
 
-Os resultados apresentados nessa última parte são bem interessantes as variáveis Idade, Carga e VO2 apresentaram um alto nível de correlação entre sí enquanto Peso parece ser mais independete (num primeiro momento).
+Os resultados apresentados nessa última parte são bem interessantes as variáveis Idade, Carga e VO2 apresentaram um alto nível de correlação entre si enquanto Peso parece ser mais independente (num primeiro momento).
 
-Assim, uma vez que uma exploração inicial dos dados foi realizada discuções a respeito de modelos podem ser executadas com uma maior propriedade.
+Assim, uma vez que uma exploração inicial dos dados foi realizada discussões a respeito de modelos podem ser executadas com uma maior propriedade.
 
 # Data Split:
 
-Inicialmente faremos uma divisão na base dados em dados de teste e dados de trainamento, de maneira que 172 dados sejam separados para dados de teste, assim foi gerado um vector com (X) que possúi 1172 valores binários aonde mil valores são do tipo "1" e 172 são do tipo "0". Os resultados nesse vetor foram embaralhados aleatóriamente de maneira que, em nossa base, todos os dados para qual o valor de "x" for igual a "1" então o ponto de ordenação correspondente na base dado será defenido com ponto de treinamento, de maneira análoga, os pontos que estiverem associados a um "0" no vetor X serão definidos como pontos de teste. Para referência, segue o vetor X na seção de Apêndice desse mesmo trabalho.
+Inicialmente faremos uma divisão na base dados em dados de teste e dados de treinamento, de maneira que 172 dados sejam separados para dados de teste, assim foi gerado um vector com (X) que possui 1172 valores binários aonde mil valores são do tipo "1" e 172 são do tipo "0". Os resultados nesse vetor foram embaralhados aleatoriamente de maneira que, em nossa base, todos os dados para qual o valor de "x" for igual a "1" então o ponto de ordenação correspondente na base dado será definido com ponto de treinamento, de maneira análoga, os pontos que estiverem associados a um "0" no vetor X serão definidos como pontos de teste. Para referência, segue o vetor X na seção de Apêndice desse mesmo trabalho.
 
 Feito isso temos dois novos conjuntos:
 
@@ -113,23 +103,23 @@ As tabelas apresentam as característica dos novos conjuntos de pontos. Testes m
 
 # I) Regressão de VO2:
 
-1) O primeiro modelo proposto é uma regressão polinomial de "VO2" por "Carga Final". A seguir faremos testes com polinômios entre grau 1 e 7. Polinômios com grau superior poderiam ter sido utilizados, mas sete variações de modelo polinômial são suficientes para embasar uma análise exploratória desse tipo de modelo e utilizar mais variações do modelo acarretaria numa poluição das imagens. Assim a seguir temos um plot dos resutados obetidos:
+1) O primeiro modelo proposto é uma regressão polinomial de "VO2" por "Carga Final". A seguir faremos testes com polinômios entre grau 1 e 7. Polinômios com grau superior poderiam ter sido utilizados, mas sete variações de modelo polinomial são suficientes para embasar uma análise exploratória desse tipo de modelo e utilizar mais variações do modelo acarretaria numa poluição das imagens. Assim a seguir temos um plot dos resultados obtidos:
 
 ![Plots para a regressão polinomial](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/poly_plot.png)
 
-Resultados das regreções estão no apendice, assim como os súmarios das regreções. Os coeficientes dos modelos estão plotados na tabela a seguir:
+Resultados das regressões estão no apêndice, assim como os sumários das regressões. Os coeficientes dos modelos estão plotados na tabela a seguir:
 
 ![Coeficiente dos termos na primeira regressão linear](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/Coef_linear_1.png)
 
-A seguir segue uma breve discussão sobre a relevancia do NLL(w) num estudo do caso do modelo de regressão linear:
+A seguir segue uma breve discussão sobre a relevância do NLL(w) num estudo do caso do modelo de regressão linear:
 
 ![Imagens scaneadas do caderno](?)
 
-Uma vez entendido o que é o NLL é possivel se compriender como os modelos (que os resultados foram plotados no ínicio dessa seção) foram obtidos. Aqui talvez fosse interessante apresentar o NLL para cada modelo, mas foi feito a opção por usar o R² para compara os resultados do multiplos modelos. Isso porque, na visão do autor, ele oferece um resultado de mais fácil comprienção sobre a capacidade explicativa dos modelos, além de ser "normalizado" (a ordem do resultado não é influencia pela número de pontos nem pela ordem de grandeza de "y". R² é definido como:
+Uma vez entendido o que é o NLL é possível se compreender como os modelos (que os resultados foram plotados no inicio dessa seção) foram obtidos. Aqui talvez fosse interessante apresentar o NLL para cada modelo, mas foi feito a opção por usar o R² para compara os resultados do múltiplos modelos. Isso porque, na visão do autor, ele oferece um resultado de mais fácil compreensão sobre a capacidade explicativa dos modelos, além de ser "normalizado" (a ordem do resultado não é influencia pela número de pontos nem pela ordem de grandeza de "y". R² é definido como:
 
 ![R-Squared definição](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/raquared.png)
 
-Aqui fica claro como o R² se relaciona com o NLL uma vez que ambos são baseados no RSS (Residual Sum of Squares). Um plot da variação do R² (dos dados de teste e trainamento) para os modelos testados:
+Aqui fica claro como o R² se relaciona com o NLL uma vez que ambos são baseados no RSS (Residual Sum of Squares). Um plot da variação do R² (dos dados de teste e treinamento) para os modelos testados:
 
 ![Comparação resultados para dados de treinamento e de teste](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/testXtrain_result.png)
 
@@ -138,9 +128,9 @@ y1=[0.7750754467,0.7754524946,0.7754539306,0.7757899819,0.7759189671,0.775985176
 y2=[0.7454585045,0.7455548709,0.7454815363,0.7451629196,0.7436750232,0.7439609531,0.7434698284]
 ```
 
-Nesse gráfico é possivel perceber que a medida que o número de features, para suportar o modelo, aumenta o R² nos dados de treinamento aumenta, porém o contrário é percebido para os dados de teste, nestes é possível ver uma pequena melhora seguida de uma queda no resultado.
+Nesse gráfico é possível perceber que a medida que o número de features, para suportar o modelo, aumenta o R² nos dados de treinamento aumenta, porém o contrário é percebido para os dados de teste, nestes é possível ver uma pequena melhora seguida de uma queda no resultado.
 
-Se considerarmos simplesmente os resultados, o modelo que apresenta o maior poder explicativo sobre os resultados sobre os dados de treinamento é o modelo com termos até a segunda ordem, porém a variação dos resultados foi tão pequena que, na visão do autor, o melhor modelo para predizer os dados é o de uma função de primeiro grau. Outros tipo de testes de acurácio poderiam ser feitos para aumentar a confiasa nos resultados (em vez de fazer um simples split dos dados poderia-se usar um K-fold), mas como os melhores foi de uma diferença muito pequena, foi dado preferencia ao mais simples.
+Se considerarmos simplesmente os resultados, o modelo que apresenta o maior poder explicativo sobre os resultados sobre os dados de treinamento é o modelo com termos até a segunda ordem, porém a variação dos resultados foi tão pequena que, na visão do autor, o melhor modelo para predizer os dados é o de uma função de primeiro grau. Outros tipo de testes de acurácia poderiam ser feitos para aumentar a confiança nos resultados (em vez de fazer um simples split dos dados poderia se usar um K-fold), mas como os melhores foi de uma diferença muito pequena, foi dado preferencia ao mais simples.
 
 Assim, usando só a carga como input, o modelo escolhido é:
  
@@ -150,7 +140,7 @@ Assim, usando só a carga como input, o modelo escolhido é:
 
 ![Comparação resultados para dados de treinamento e de teste](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/r_square_2.png)
 
-Como podemos ver na imagem a cima, existe uma região aonde os modelos obtem o melhor resultado. Essa região se inícia nas funções com termos de segundo grau, por isso o modelo escolhido para regressão de VO2 a partir de Carga e Peso:
+Como podemos ver na imagem a cima, existe uma região aonde os modelos obtem o melhor resultado. Essa região se inicia nas funções com termos de segundo grau, por isso o modelo escolhido para regressão de VO2 a partir de Carga e Peso:
 
 ![modelo 2](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model2.png)
 
@@ -158,15 +148,15 @@ Como podemos ver na imagem a cima, existe uma região aonde os modelos obtem o m
 
 ![Comparação resultados para dados de treinamento e de teste](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/r_square_3.png)
 
-Nos resultados apresentados a cima é possível perceber que a adição da variável "Idade" não aumentou o nível de acurácia dos modelos, de maneira que o modelo adotado para regressão com as três variáveis será o mesmo na etápa anterior, ou seja:
+Nos resultados apresentados a cima é possível perceber que a adição da variável "Idade" não aumentou o nível de acurácia dos modelos, de maneira que o modelo adotado para regressão com as três variáveis será o mesmo na etapa anterior, ou seja:
 
 
 ![modelo 2](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model2.png)
 
 
-4) Agora os resultados obtidos deve ser coparado com um modelo baseado na teória médica:
+4) Agora os resultados obtidos deve ser comparado com um modelo baseado na teoria médica:
 
-Se compararmos o modelo escolido como melhor dentre todas as regreções com o proposto pela "American College of Sports
+Se compararmos o modelo escolhido como melhor dentre todas as regressões com o proposto pela "American College of Sports
 Medicine" obteremos o seguinte resultado:
 
 ```
@@ -176,12 +166,12 @@ Medicine" obteremos o seguinte resultado:
 0.89900747095256661
 
 ```
-A pesar dos resultados serem praticamente equivalentes o modelo que apresenta maior poder explicativo deve ser sempre preferido, assim o modelo proposto pelos expecialista tem maior valor.
+A pesar dos resultados serem praticamente equivalentes o modelo que apresenta maior poder explicativo deve ser sempre preferido, assim o modelo proposto pelos especialista tem maior valor.
 
 # II)  Gaussiana multivariada:
 
-## 1) Modelo de Gaussiana multivariada bidimenssional
-O próximo modelo é uma gaussiana multivariada. Na teoria de probabilidade e nas estatísticas, a distribuição normal multivariada (ou distribuição gaussiana multivariada) é uma generalização da distribuição normal univariada para maiores dimensões. A Hipótese básica que as features são normalmente destribuidas (numa análise univariável) e que são linearmente correlacionadas. 
+## 1) Modelo de Gaussiana multivariada bidimensional
+O próximo modelo é uma gaussiana multivariada. Na teoria de probabilidade e nas estatísticas, a distribuição normal multivariada (ou distribuição gaussiana multivariada) é uma generalização da distribuição normal uni variada para maiores dimensões. A Hipótese básica que as features são normalmente distribuidas (numa análise univariável) e que são linearmente correlacionadas. 
 
 Se realizarmos uma regressão utilizando as variáveis "Carga Final" e "VO2 medido" como base de dados,  usando os dados de treinamento, chegaremos aos resultados:
 
@@ -202,9 +192,9 @@ De maneira que se plotarmos o modelo sobre a base de dados teremos o seguinte re
 
 ![Modelo de Gaussiana Multivariada 2 dimessões](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/model_gauss_plus_scatter.png)
 
-Um exemplo bidimensional é interessante justamente por que é possvel realizar representações como essas apresentadas a cima. Nessas imagens é possivel perceber que aparentimente o modelo é razoávelmente adequado aos dodos. A seguir implementações com uma dimensionalidades maiores serão feitas e dai será discutido a acurácio e outros aspectos relevantes desse tipo de modelo.
+Um exemplo bidimensional é interessante justamente por que é possível realizar representações como essas apresentadas a cima. Nessas imagens é possível perceber que aparentemente o modelo é razoavelmente adequado aos dodos. A seguir implementações com uma dimensionalidades maiores serão feitas e dai será discutido a acurácia e outros aspectos relevantes desse tipo de modelo.
 
-## 2) Modelo de Gaussiana multivariada 3-dimenssional
+## 2) Modelo de Gaussiana multivariada 3-dimensional
 
 A seguir iremos regredir o mesmo tipo de modelo usando como base "Peso (kg)", "Carga Final" e "VO2 medido máximo (mL/kg/min)":
 
@@ -225,7 +215,7 @@ Para entender um pouco mais as propriedades desse tipo de modelo vamos olhar par
 
 ![Pontos escolhidos](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/pontos_gauss_quetion2.png)
 
-Arbitráriamente foram selecionados os pontos:
+Arbitrariamente foram selecionados os pontos:
 
 Ponto | Peso | Carga
 ----  | ---- | -----
@@ -255,7 +245,7 @@ Considerando a probabilidade condicional:
 
 ![Probabilidade condicional](https://github.com/Lucas-Armand/Medical-Data-Regression/blob/master/condicional_form.png)
 
-Dessa maneira obtemos as funções de probabilidade para os pontos sitados a cima. Porém, muitas das vezes não se deseja obter a destribuição em si, mas se realizar alguma sorte de predição sobrea a variável. Nesse sentido esse método é diferente do análisado anteriormente porque além de ser possível escolher o valor mais provável (no caso a média) para ser o "resultado" da regressão, mas é possível estabelecer um nível de conviança se a esse resultado for assocaido um intervalo e a probabilidade do resultado estar dentro desse intervalo. A seguir uma tabela que apresenta o resultado obtidos a partir dos dois modelos explorados até esse ponto.
+Dessa maneira obtemos as funções de probabilidade para os pontos citados a cima. Porém, muitas das vezes não se deseja obter a distribuição em si, mas se realizar alguma sorte de predição sobre a variável. Nesse sentido esse método é diferente do analisado anteriormente porque além de ser possível escolher o valor mais provável (no caso a média) para ser o "resultado" da regressão, mas é possível estabelecer um nível de confiança se a esse resultado for associado um intervalo e a probabilidade do resultado estar dentro desse intervalo. A seguir uma tabela que apresenta o resultado obtidos a partir dos dois modelos explorados até esse ponto.
 
 
 Linear| Gauss média| Gauss interv.
@@ -556,4 +546,3 @@ R² Trainamento:
 0.776089958278
 R² Teste:
 0.743469828356
-
